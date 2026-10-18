@@ -17,14 +17,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.8'
+
       - name: Build
-        run: |
-          chmod +x ./gradlew
-          ./gradlew build --no-daemon
+        run: gradle build --no-daemon
 
       - name: Upload jar
         uses: actions/upload-artifact@v4
         with:
           name: parcool-dltb-bridge-3x
           path: build/libs/parcool-dltb-bridge-*.jar
-
